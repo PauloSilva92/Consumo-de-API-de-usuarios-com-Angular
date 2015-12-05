@@ -32,11 +32,15 @@
 				};
 			});
 		};
+		
+		//apaga os dados do usuario do localStorage
 		function logout(){
 			localStorage.removeItem('user_id');
 			localStorage.removeItem('token');
 		};
 		
+		
+		//obtem os dados do usuario
 		var getUser = function(){
 			if(localStorage.token){
 				usersAPI.search().success(function(data){
