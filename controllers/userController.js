@@ -15,21 +15,27 @@
 		//função de login do usuario
 		//caso retorne um usuario, salva o token do mesmo no localStorage
 		function login(user){
-			usersAPI.login(user).success(function(data){
+			usersAPI.login(user).then(function success(data){
 				if(data.type === true){
 					localStorage.setItem('token',data.token);
 					
 				};
+			},
+			function error(status){
+				
 			});
 		};
 		
 		//função que cadastra usuario
 		//caso retorne true, salva o token no local storage
 		function addUser(user){
-			usersAPI.save(user).success(function(data){
+			usersAPI.save(user).then(function success(data){
 				if(data.type === true){
 					localStorage.setItem('token',data.token);
 				};
+			},
+			function error(status){
+				
 			});
 		};
 		
@@ -43,10 +49,13 @@
 		//obtem os dados do usuario
 		var getUser = function(){
 			if(localStorage.token){
-				usersAPI.search().success(function(data){
+				usersAPI.search().then(function success(data){
 					$scope.users=data.data;
 					localStorage.setItem('user_id',data.data._id);
-				});
+				},
+			function error(status){
+				
+			});
 			}
 		};
 		getUser();
